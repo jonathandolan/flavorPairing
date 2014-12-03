@@ -10,13 +10,13 @@ class Recipe(models.Model):
 
 
 class Ingredient(models.Model):
-    ingredientID = models.IntegerField(primary_key=true)
+    ingredientID = models.IntegerField(primary_key=True)
     ingredientName = models.CharField(max_length=45)
     ingredientDesc = models.CharField(max_length=45)
     ingredientCategory = models.CharField(max_length=45)
     ingredientAroma = models.CharField(max_length=45)
-    pairingID = models.ForeignKey(Pairing)
-    cuisineID = models.ForeignKey(Cuisine)
+    pairingID = models.ForeignKey('Pairing')
+    cuisineID = models.ForeignKey('Cuisine')
 
 
 class Bakery(models.Model):
@@ -89,7 +89,7 @@ class HealthRating(models.Model):
 
 class Pairing(models.Model):
     pairingID = models.IntegerField(primary_key=True)
-    ingredientID = models.ForeignKey(Ingredient)
-    ingredientID2 = models.ForeignKey(Ingredient)
+    ingredientID = models.ForeignKey('Ingredient')
+    ingredientID2 = models.ForeignKey('Ingredient', related_name="ing2")
     strength = models.IntegerField()
     rating = models.IntegerField()
