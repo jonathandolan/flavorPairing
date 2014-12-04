@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_messages %}
+{% load staticfiles %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">
+        {% bootstrap_icon "star" %} Submit
+        </button>
+    {% endbuttons %}
+</form>
+{% endblock %}
