@@ -9,13 +9,13 @@ from django import forms
 
 
 # Views
-
 class IngredientCreate(CreateView):
     model = Ingredient
     fields = ['ingredientName']
 
 class IngredientForm(forms.Form):
     ing_name = forms.CharField(label='Ingredient name', max_length=100)
+
 
 def get_ing_name(request):
     # if this is a POST request we need to process the form data

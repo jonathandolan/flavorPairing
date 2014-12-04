@@ -1,11 +1,44 @@
 {% load bootstrap3 %}
-<!DOCTYPE html>
+{% load staticfiles %}
+
 <html>
+
 <head lang="en">
+    <link href="{% static 'css/bootsrap.css' %}"
+          rel="stylesheet" media="screen">
+    <link href="{% static 'css/bootstrap.css' %}"
+            rel="stylesheet" type="text/css">
+    <link href="{% static 'css/animate.css' %}"
+            rel="stylesheet" type="text/css">
+    <link href="{% static 'css/font-awesome.min.css' %}"
+            rel="stylesheet" type="text/css">
+    <link href="{% static 'css/font.css' %}"
+            rel="stylesheet" type="text/css">
+    <link href="{% static 'js/calendar/bootstrap_calendar.css' %}"
+            rel="stylesheet" type="text/css">
+    <link href="{% static 'css/app.css' %}"
+            rel="stylesheet" type="text/css" />
     <meta charset="UTF-8">
     <title>FlavorPairing</title>
 </head>
+
 <body>
-    {% block content %} {% endblock %}
+    {% block content %}
+
+    {% endblock %}
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="js/bootstrap.js"></script>
+    <!-- App -->
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/app.plugin.js' %}"></script>
+    <script src="{% static 'js/slimscroll/jquery.slimscroll.min.js' %}"></script>
+    <script src="{% static 'js/charts/sparkline/jquery.sparkline.min.js' %}"></script>
+
+    <script src="{% static 'js/calendar/bootstrap_calendar.js' %}"></script>
+    <script src="{% static 'js/calendar/demo.js' %}"></script>
+
+    <script src="{% static 'js/sortable/jquery.sortable.js' %}"></script>
 </body>
 </html>
