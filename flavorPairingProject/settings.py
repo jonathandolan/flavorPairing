@@ -30,6 +30,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'django_admin_bootstrapped.bootstrap3',
+    'django_admin_bootstrapped',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'flavorPairing',
     'bootstrap3',
+
 )
 
 MIDDLEWARE_CLASSES = (
