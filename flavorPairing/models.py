@@ -4,14 +4,14 @@ from django.core.urlresolvers import reverse
 # Create your models here.
 
 class Recipe(models.Model):
-    recipeID = models.IntegerField(primary_key=True)
+    recipeID = models.AutoField(primary_key=True)
     recipeName = models.CharField(max_length=45)
     recipeDesc = models.CharField(max_length=45)
     recipeInstr = models.CharField(max_length=45)
 
 
 class Ingredient(models.Model):
-    ingredientID = models.IntegerField(primary_key=True)
+    ingredientID = models.AutoField(primary_key=True)
     ingredientName = models.CharField(max_length=45)
     ingredientDesc = models.CharField(max_length=45)
     ingredientCategory = models.CharField(max_length=45)

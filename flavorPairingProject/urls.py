@@ -18,8 +18,7 @@ urlpatterns = patterns('',
     url(r'^accounts/logout/$', 'flavorPairing.views.logout'),
     url(r'^accounts/loggedin/$', 'flavorPairing.views.loggedin'),
     url(r'^accounts/invalid/$', 'flavorPairing.views.invalid_login'),
-    url(r'^createIngredient/$', 'flavorPairing.views.IngredientCreate'),
-    url(r'ingredient/add/$', IngredientCreate.as_view(), name='ingredient_add'),
+    url(r'ingredient/add/$', 'flavorPairing.views.get_ing_name', name='ingredient_add'),
 )
 
 urlpatterns += staticfiles_urlpatterns()

@@ -1,17 +1,17 @@
-{% extends 'base.html' %}
-{% load bootstrap3 %}
-{% bootstrap_css %}
-{% bootstrap_messages %}
-{% load staticfiles %}
+{% extends "theme_bootstrap/base.html" %}
+{% load bootstrap_tags %}
+
+{% block head_title %}Add Ingredient{% endblock %}
 
 {% block content %}
-<form action="" method="post">
+<legend>Add Ingredient</legend>
+<form action="{% url 'flavorPairing.views.get_ing_name' %}" method="post">
     {% csrf_token %}
-    {% bootstrap_form form %}
-    {% buttons %}
+    {{  form|as_bootstrap }}
+    <div class="form-control">
     <button type="submit" class="btn btn-primary">
-        {% bootstrap_icon "star" %} Submit
-        </button>
-    {% endbuttons %}
+        Submit
+    </button>
+    </div>
 </form>
 {% endblock %}

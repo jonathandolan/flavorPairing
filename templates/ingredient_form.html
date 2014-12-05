@@ -1,9 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'site_base.html' %}
+{% load bootstrap_tags %}
 
-{% block content %}
-<form action="/your-name/" method="post">
+{% block head_title %}Add Ingredient{% endblock %}
+
+
+{% block body_base %}
+<legend>Add Ingredient</legend>
+<form action="{% url 'flavorPairing.views.get_ing_name' %}" method="post">
     {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit" />
+    {{  form|as_bootstrap }}
+    <div class="form-control">
+    <button type="submit" class="btn btn-primary">
+        Submit
+    </button>
+    </div>
 </form>
 {% endblock %}

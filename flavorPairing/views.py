@@ -24,16 +24,19 @@ def get_ing_name(request):
         form = IngredientForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            # process the data in form.cleaned_data as required
+            newIngredientName = request.POST.get('ing_name', '')
+            newIng = Ingredient(ingredientName=newIngredientName)
+            newIng.save()
             # ...
             # redirect to a new URL:
-            return HttpResponseRedirect('/ingredient/add')
+            return HttpResponseRedirect('/ingredient/add/')
+
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = IngredientForm()
 
-    return render(request, 'name.html', {'form': form})
+    return render(request, 'ingredient_form.html', {'form': form})
 
 def login(request):
     c = {}
