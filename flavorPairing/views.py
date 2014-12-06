@@ -3,19 +3,26 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
-from django.views.generic.edit import CreateView
+from django.views.generic import ListView, DetailView, CreateView
 from flavorPairing.models import Ingredient
 from django import forms
 
 
 # Views
+class IngredientListView(ListView):
+    model = Ingredient
+
+    def get_queryset(self):
+        qs = Ingredient.objects.all()
+        return qs
+
 class IngredientCreate(CreateView):
     model = Ingredient
     fields = ['ingredientName']
 
 class IngredientForm(forms.Form):
-    ing_name = forms.CharField(label='Ingredient name', max_length=100)
-
+    ing_name = forms.CharField(label='Ingredient Name', max_length=30)
+    ing_desc = forms.CharField(label='Ingredient Description', max_length=100)
 
 def get_ing_name(request):
     # if this is a POST request we need to process the form data

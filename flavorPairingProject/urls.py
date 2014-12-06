@@ -1,8 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from flavorPairing.views import IngredientCreate
+from flavorPairing.views import IngredientListView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 
 urlpatterns = patterns('',
 
@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^accounts/loggedin/$', 'flavorPairing.views.loggedin'),
     url(r'^accounts/invalid/$', 'flavorPairing.views.invalid_login'),
     url(r'ingredient/add/$', 'flavorPairing.views.get_ing_name', name='ingredient_add'),
+    url(r'^ingredient-list/$', IngredientListView.as_view(), name='ingredient_list')
 )
 
 urlpatterns += staticfiles_urlpatterns()

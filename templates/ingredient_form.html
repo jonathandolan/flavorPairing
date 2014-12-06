@@ -3,16 +3,17 @@
 
 {% block head_title %}Add Ingredient{% endblock %}
 
-
 {% block body_base %}
+    <section>
+<div class="container">
 <legend>Add Ingredient</legend>
 <form action="{% url 'flavorPairing.views.get_ing_name' %}" method="post">
     {% csrf_token %}
     {{  form|as_bootstrap }}
-    <div class="form-control">
     <button type="submit" class="btn btn-primary">
         Submit
     </button>
-    </div>
 </form>
+</div>
+</section>
 {% endblock %}

@@ -1,0 +1,23 @@
+{% extends "site_base.html" %}
+
+
+{% block head_title %}All Ingredients{% endblock %}
+
+{% block body_base %}
+    <div class="container">
+
+    <table class ="table">
+    <tr>
+        <th>Ingredient</th>
+        <th>Description</th>
+    </tr>
+    {% for ingredient in object_list %}
+	<tr>
+        <td>{{ ingredient.ingredientName }}</td>
+        <td>{{ ingredient.ingredientDesc }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+
+    </div>
+{% endblock %}
