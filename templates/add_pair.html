@@ -1,0 +1,19 @@
+{% extends 'site_base.html' %}
+{% load bootstrap_tags %}
+
+{% block head_title %}Add Pair{% endblock %}
+
+{% block body_base %}
+    <section>
+<div class="container">
+<legend>Add Pair</legend>
+<form action="{% url 'flavorPairing.views.get_pair' %}" method="post">
+    {% csrf_token %}
+    {{  form|as_bootstrap }}
+    <button type="submit" class="btn btn-primary">
+        Submit
+    </button>
+</form>
+</div>
+</section>
+{% endblock %}

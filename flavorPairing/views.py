@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.views.generic import ListView, DetailView, CreateView
-from flavorPairing.models import Ingredient
+from flavorPairing.models import Ingredient, Pairing
 from django import forms
 
 
@@ -16,9 +16,33 @@ class IngredientListView(ListView):
         qs = Ingredient.objects.all()
         return qs
 
-class IngredientCreate(CreateView):
-    model = Ingredient
-    fields = ['ingredientName']
+class PairForm(forms.Form):
+    ingredient1 = forms.CharField(label='First Ingredient', max_length=30)
+    ingredient2 = forms.CharField(label='Second Ingredient', max_length=30)
+    pairStrength = forms.IntegerField(label='Strength of Pair')
+
+def get_pair(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = PairForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            pair1 = request.POST.get('ingredient1', '')
+            pair2 = request.POST.get('ingredient2', '')
+            strength = request.POST.get('pairStrength', '')
+            newPair = Pairing()
+            newPair.save()
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/pair/add/')
+
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = PairForm()
+
+    return render(request, 'add_pair.html', {'form': form})
 
 class IngredientForm(forms.Form):
     ing_name = forms.CharField(label='Ingredient Name', max_length=30)
