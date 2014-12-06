@@ -6,6 +6,7 @@ from django.core.context_processors import csrf
 from django.views.generic import ListView, DetailView, CreateView
 from flavorPairing.models import Ingredient, Pairing
 from django import forms
+from django.db.models import Q
 
 
 # Views
@@ -15,6 +16,32 @@ class IngredientListView(ListView):
     def get_queryset(self):
         qs = Ingredient.objects.all()
         return qs
+
+class PairListView(ListView):
+    model = Pairing
+
+    def get_queryset(self, ing1):
+        qs = Pairing.objects.filter(Q(ingredient1=ing1)|Q(ingredient2=ing1))
+        return qs
+
+class SearchPair(forms.Form):
+    searchIngredient = forms.CharField(label="Find Pairings For:")
+
+def find_pairings(request):
+    #If post, search & return list
+    t = False
+    if request.method == 'POST':
+
+        searchIngredient = request.POST.get('searchIngredient', '')
+
+        pList = PairListView.as_view()
+        t = True
+
+    # if a GET (or any other method) we'll create a blank search form
+    else:
+        pList = SearchPair()
+
+    return render(request, 'find_pair.html', {'form': pList, 'disp': t})
 
 class PairForm(forms.Form):
     ingredient1 = forms.CharField(label='First Ingredient', max_length=30)

@@ -95,5 +95,7 @@ class Pairing(models.Model):
     pairingID = models.IntegerField(primary_key=True)
     ingredientID = models.ForeignKey('Ingredient')
     ingredientID2 = models.ForeignKey('Ingredient', related_name="ing2")
+    ingredient1 = models.CharField(max_length=45)
+    ingredient2 = models.CharField(max_length=45)
     strength = models.IntegerField()
     rating = models.IntegerField()

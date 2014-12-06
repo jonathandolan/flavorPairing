@@ -8,6 +8,18 @@
             <i class="fa fa-user"></i> {% user_display request.user %}
         </p>
         <li>
+            <a href="{% url 'flavorPairing.views.get_ing_name' %}"><i class="fa fa-edit"></i> Add Ingredient</a>
+        </li>
+        <li>
+            <a href="/ingredient-list/"><i class="fa fa-list-alt"></i> List Ingredients</a>
+        </li>
+        <li>
+            <a href="{% url 'flavorPairing.views.get_pair' %}"><i class="fa fa-edit"></i> Add Flavor Pairing</a>
+        </li>
+        <li>
+            <a href="{% url 'flavorPairing.views.find_pairings' %}"><i class="fa fa-search"></i> Find Flavor Pairing</a>
+        </li>
+        <li>
             <a href="{% url 'account_settings' %}"><i class="fa fa-cog"></i> {% trans "Settings" %}</a>
         </li>
         <li>

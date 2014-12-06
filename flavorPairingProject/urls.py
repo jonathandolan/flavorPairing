@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     url(r'ingredient/add/$', 'flavorPairing.views.get_ing_name', name='ingredient_add'),
     url(r'^ingredient-list/$', IngredientListView.as_view(), name='ingredient_list'),
     url(r'^pair/add/$', 'flavorPairing.views.get_pair', name='pair_add'),
+    url(r'^pair/find/$', 'flavorPairing.views.find_pairings', name='find_pair'),
 )
 
 urlpatterns += staticfiles_urlpatterns()

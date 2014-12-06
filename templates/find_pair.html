@@ -1,0 +1,45 @@
+{% extends 'site_base.html' %}
+{% load bootstrap_tags %}
+
+{% block head_title %}Find Pair{% endblock %}
+
+{% block body_base %}
+
+{% if disp %}
+    <div class="container">
+    <legend>All Pairs</legend>
+
+    <table class ="table">
+    <tr>
+        <th>Ingredient</th>
+        <th>Pair</th>
+        <th>Description</th>
+    </tr>
+    {% for pair in object_list %}
+	<tr>
+        <td>{{ pair.ingredientName }}</td>
+        <td>{{ pair.ingredientDesc }}</td>
+        <td>{{ pair.strength }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+
+    </div>
+
+{% else %}
+
+    <section>
+<div class="container">
+<legend>Find Pairings for an Ingredient</legend>
+<form action="{% url 'flavorPairing.views.find_pairings' %}" method="post">
+    {% csrf_token %}
+    {{  form|as_bootstrap }}
+    <button type="submit" class="btn btn-primary">
+        Submit
+    </button>
+</form>
+</div>
+</section>
+{% endif %}
+
+{% endblock %}
