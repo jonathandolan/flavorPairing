@@ -21,7 +21,8 @@ class PairListView(ListView):
     model = Pairing
 
     def get_queryset(self, ing1):
-        qs = Pairing.objects.filter(Q(ingredient1=ing1)|Q(ingredient2=ing1))
+        qs = Pairing.objects.all()
+        #qs = Pairing.objects.filter(Q(ingredient1=ing1)|Q(ingredient2=ing1))
         return qs
 
 class SearchPair(forms.Form):

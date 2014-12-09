@@ -80,7 +80,7 @@ TEMPLATE_DIRS = (
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'flavorPairing',
+        'NAME': 'flavorPair',
         'USER': 'userName',
         'PASSWORD': 'pass',
         'HOST': 'localhost',
