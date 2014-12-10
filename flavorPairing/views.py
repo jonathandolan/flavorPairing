@@ -72,9 +72,18 @@ def get_pair(request):
 
     return render(request, 'add_pair.html', {'form': form})
 
+CUISINE_CHOICES = (
+        ('none', 'None'),
+        ('asian', 'Asian'),
+        ('european', 'European'),
+        ('oceanian', 'Oceanian'),
+        ('american', 'American'),
+    )
+
 class IngredientForm(forms.Form):
     ing_name = forms.CharField(label='Ingredient Name', max_length=30)
     ing_desc = forms.CharField(label='Ingredient Description', max_length=100)
+    cuisine = forms.ChoiceField(label='Type of Cuisine', choices=CUISINE_CHOICES)
 
 def get_ing_name(request):
     # if this is a POST request we need to process the form data

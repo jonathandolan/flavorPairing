@@ -10,7 +10,14 @@ class Ingredient(models.Model):
     ingredientCategory = models.CharField(max_length=45)
     ingredientAroma = models.CharField(max_length=45)
     ingredientBeverage = models.BooleanField(default=False)
-    cuisine = models.OneToOneField('Cuisine')
+    CUISINE_CHOICES = (
+        ('none', 'None'),
+        ('asian', 'Asian'),
+        ('european', 'European'),
+        ('oceanian', 'Oceanian'),
+        ('american', 'American'),
+    )
+    cuisine = models.CharField(max_length=8,choices=CUISINE_CHOICES, default='none')
     #   pairing_ID = models.ForeignKey('Pairing')
 
 
@@ -23,7 +30,7 @@ class Cuisine(models.Model):
 class Pairing(models.Model):
     ingredientName1 = models.CharField(max_length=45, default=" ")
     ingredientName2 = models.CharField(max_length=45, default=" ")
-    ingredientRelationship1 = models.OneToOneField('Ingredient', default=0)
-    ingredientRelationship2 = models.OneToOneField('Ingredient', related_name=" ", default=0)
+    ingredientRelationship1 = models.OneToOneField('Ingredient', default=1)
+    ingredientRelationship2 = models.OneToOneField('Ingredient', related_name=" ", default=1)
     strength = models.IntegerField()
     rating = models.IntegerField()
