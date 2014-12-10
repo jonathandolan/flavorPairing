@@ -1,0 +1,28 @@
+{% extends 'site_base.html' %}
+{% load bootstrap_tags %}
+
+{% block head_title %}Find Pair{% endblock %}
+
+{% block body_base %}
+
+
+    <div class="container">
+    <legend>All Pairs</legend>
+
+    <table class ="table">
+    <tr>
+        <th>Ingredient</th>
+        <th>Strength of Pair</th>
+    </tr>
+    {% for pair in object_list %}
+	<tr>
+        <td>{{ pair.ingredientName1 }} & {{ pair.ingredientName2 }}</td>
+        <td>{{ pair.strength }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+
+    </div>
+
+
+{% endblock %}

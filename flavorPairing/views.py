@@ -20,7 +20,7 @@ class IngredientListView(ListView):
 class PairListView(ListView):
     model = Pairing
 
-    def get_queryset(self, ing1):
+    def get_queryset(self):
         qs = Pairing.objects.all()
         #qs = Pairing.objects.filter(Q(ingredient1=ing1)|Q(ingredient2=ing1))
         return qs
@@ -34,7 +34,6 @@ def find_pairings(request):
     if request.method == 'POST':
 
         searchIngredient = request.POST.get('searchIngredient', '')
-
         pList = PairListView.as_view()
         t = True
 
@@ -45,8 +44,8 @@ def find_pairings(request):
     return render(request, 'find_pair.html', {'form': pList, 'disp': t})
 
 class PairForm(forms.Form):
-    ingredient1 = forms.CharField(label='First Ingredient', max_length=30)
-    ingredient2 = forms.CharField(label='Second Ingredient', max_length=30)
+    ingredient = forms.ModelChoiceField(queryset=Ingredient.objects.all(), label='First Ingredient')
+    ingredient2 = forms.ModelChoiceField(queryset=Ingredient.objects.all(), label='Second Ingredient')
     pairStrength = forms.IntegerField(label='Strength of Pair')
 
 def get_pair(request):
@@ -56,10 +55,15 @@ def get_pair(request):
         form = PairForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            pair1 = request.POST.get('ingredient1', '')
-            pair2 = request.POST.get('ingredient2', '')
-            strength = request.POST.get('pairStrength', '')
-            newPair = Pairing()
+            pair1 = form.cleaned_data.get('ingredient')
+            pair2 = form.cleaned_data.get('ingredient2')
+            s = form.cleaned_data.get('pairStrength')
+            ing1 = Ingredient.objects.get(ingredientName=pair1)
+            id1 = ing1.id
+            ing2 = Ingredient.objects.get(ingredientName=pair2)
+            id2 = ing2.id
+            newPair = Pairing(ingredientName1=pair1, ingredientName2=pair2,
+                              strength=s, ingredientRelationship1=ing1, ingredientRelationship2=ing2)
             newPair.save()
             # ...
             # redirect to a new URL:

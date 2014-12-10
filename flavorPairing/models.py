@@ -18,7 +18,9 @@ class Ingredient(models.Model):
         ('american', 'American'),
     )
     cuisine = models.CharField(max_length=8,choices=CUISINE_CHOICES, default='none')
-    #   pairing_ID = models.ForeignKey('Pairing')
+
+    def __str__(self):
+        return self.ingredientName
 
 
 class Cuisine(models.Model):
@@ -33,4 +35,3 @@ class Pairing(models.Model):
     ingredientRelationship1 = models.OneToOneField('Ingredient', default=1)
     ingredientRelationship2 = models.OneToOneField('Ingredient', related_name=" ", default=1)
     strength = models.IntegerField()
-    rating = models.IntegerField()
