@@ -19,7 +19,7 @@
             </p>
             {% if user.is_authenticated %}
             {% url "what_next" as what_next_url %}
-            <p class="what_next">{% blocktrans %}Now... <a href="{{ what_next_url }}" class="btn btn-primary large">Find Pairs!</a>?{% endblocktrans %}</p>
+            <p class="what_next">{% blocktrans %}Now... <a href="{{ pair_url }}" class="btn btn-primary large">Find Pairs!</a>?{% endblocktrans %}</p>
             {% else %}
             {% url "account_login" as login_url %}
             {% url "account_signup" as signup_url %}
