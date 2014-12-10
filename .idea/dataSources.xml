@@ -4,11 +4,8 @@
     <data-source source="LOCAL" name="Django default" uuid="09fba9c2-e536-4f2a-bc32-4d9a68030838">
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://127.0.0.1:3306/flavorPairing</jdbc-url>
-      <user-name>userName</user-name>
-      <user-password>dfdadfcbdfd9dfd9</user-password>
+      <jdbc-url>jdbc:mysql://127.0.0.1:3306/flavorPair</jdbc-url>
       <libraries />
     </data-source>
   </component>
 </project>
-
