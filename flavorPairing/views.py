@@ -21,27 +21,34 @@ class PairListView(ListView):
     model = Pairing
 
     def get_queryset(self):
-        qs = Pairing.objects.all()
+        qs = Pairing.objects.order_by('-strength')
         #qs = Pairing.objects.filter(Q(ingredient1=ing1)|Q(ingredient2=ing1))
         return qs
 
 class SearchPair(forms.Form):
-    searchIngredient = forms.CharField(label="Find Pairings For:")
+    searchIngredient = forms.ModelChoiceField(queryset=Ingredient.objects.all(), label="Find Pairings For:")
 
 def find_pairings(request):
     #If post, search & return list
     t = False
-    if request.method == 'POST':
+    object_list = Ingredient.objects.all()
+    pList = SearchPair()
 
-        searchIngredient = request.POST.get('searchIngredient', '')
-        pList = PairListView.as_view()
-        t = True
+    if request.method == 'POST':
+        form = SearchPair(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            searchIngredient = form.cleaned_data.get('searchIngredient')
+            sIng = Ingredient.objects.get(ingredientName=searchIngredient)
+            pairs = Pairing.objects.get(Q(ingredientRelationship1 = sIng) | Q(ingredientRelationship2 = sIng))
+            object_list = pairs
+            t = True
 
     # if a GET (or any other method) we'll create a blank search form
     else:
         pList = SearchPair()
 
-    return render(request, 'find_pair.html', {'form': pList, 'disp': t})
+    return render(request, 'find_pair.html', {'form': pList, 'disp': t, 'object_list': object_list})
 
 class PairForm(forms.Form):
     ingredient = forms.ModelChoiceField(queryset=Ingredient.objects.all(), label='First Ingredient')
@@ -59,9 +66,7 @@ def get_pair(request):
             pair2 = form.cleaned_data.get('ingredient2')
             s = form.cleaned_data.get('pairStrength')
             ing1 = Ingredient.objects.get(ingredientName=pair1)
-            id1 = ing1.id
             ing2 = Ingredient.objects.get(ingredientName=pair2)
-            id2 = ing2.id
             newPair = Pairing(ingredientName1=pair1, ingredientName2=pair2,
                               strength=s, ingredientRelationship1=ing1, ingredientRelationship2=ing2)
             newPair.save()

@@ -35,3 +35,4 @@ class Pairing(models.Model):
     ingredientRelationship1 = models.OneToOneField('Ingredient', default=1)
     ingredientRelationship2 = models.OneToOneField('Ingredient', related_name=" ", default=1)
     strength = models.IntegerField()
+

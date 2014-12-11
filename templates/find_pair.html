@@ -11,35 +11,32 @@
 
     <table class ="table">
     <tr>
-        <th>Ingredient</th>
         <th>Pair</th>
-        <th>Description</th>
+        <th>Strength</th>
     </tr>
-    {% for pair in object_list %}
+
 	<tr>
-        <td>{{ pair.ingredientName1 }}</td>
-        <td>{{ pair.ingredientDesc }}</td>
-        <td>{{ pair.strength }}</td>
+        <td>{{ object_list.ingredientName1 }} & {{ object_list.ingredientName2 }}</td>
+        <td>{{ object_list.strength }}</td>
     </tr>
-    {% endfor %}
+
     </table>
 
     </div>
 
 {% else %}
-
-<section>
-<div class="container">
-<legend>Find Pairings for an Ingredient</legend>
-<form action="{% url 'flavorPairing.views.find_pairings' %}" method="post">
-    {% csrf_token %}
-    {{  form|as_bootstrap }}
-    <button type="submit" class="btn btn-primary">
-        Submit
-    </button>
-</form>
-</div>
-</section>
+    <section>
+    <div class="container">
+    <legend>Find Pairings for an Ingredient <br>OR <br> <a href="/pair-list/" class="btn btn-primary">List All</a> </legend>
+    <form action="{% url 'flavorPairing.views.find_pairings' %}" method="post">
+        {% csrf_token %}
+        {{  form|as_bootstrap }}
+        <button type="submit" class="btn btn-primary">
+            Submit
+        </button>
+    </form>
+    </div>
+    </section>
 {% endif %}
 
 {% endblock %}
